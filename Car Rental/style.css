@@ -1,0 +1,631 @@
+/* --- 1. Global Styles and Variables --- */
+:root {
+    /* Light Theme Variables */
+    --clr-primary: #007bff; /* Blue */
+    --clr-secondary: #6c757d; /* Gray */
+    --clr-accent: #ff4500; /* Orange/Red */
+    --clr-bg-main: #f4f7f6;
+    --clr-bg-card: #ffffff;
+    --clr-text-main: #1a1a1a;
+    --clr-text-secondary: #555;
+    --clr-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --clr-nav-bg: rgba(255, 255, 255, 0.8);
+
+    /* Shared Variables */
+    --border-radius-large: 15px;
+    --transition-speed: 0.3s;
+    --gradient-bg: linear-gradient(135deg, #007bff 0%, #00d4ff 100%);
+}
+
+/* Dark Theme Overrides (Applied via .dark-theme class on <body>) */
+body.dark-theme {
+    --clr-primary: #8ab4f8; /* Light Blue */
+    --clr-accent: #fbbc04; /* Yellow */
+    --clr-bg-main: #1a1a1a;
+    --clr-bg-card: #2c2c2c;
+    --clr-text-main: #e0e0e0;
+    --clr-text-secondary: #b0b0b0;
+    --clr-shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --clr-nav-bg: rgba(26, 26, 26, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Professional Typography */
+    background-color: var(--clr-bg-main);
+    color: var(--clr-text-main);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    line-height: 1.6;
+}
+
+/* --- 2. Navbar & Theme Toggle --- */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: var(--clr-nav-bg); /* Blur/Glass Effect */
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    box-shadow: var(--clr-shadow-soft);
+    transition: background var(--transition-speed);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--clr-primary);
+}
+
+nav a {
+    color: var(--clr-text-main);
+    text-decoration: none;
+    margin-left: 25px;
+    padding: 5px 0;
+    transition: color var(--transition-speed), border-bottom var(--transition-speed);
+}
+
+nav a:hover, nav a.active {
+    color: var(--clr-primary);
+    border-bottom: 2px solid var(--clr-primary);
+}
+
+#theme-toggle {
+    background: none;
+    border: none;
+    color: var(--clr-text-main);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 20px;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background var(--transition-speed), transform var(--transition-speed);
+}
+
+#theme-toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+/* --- 3. Hero Section --- */
+#hero {
+    height: 100vh;
+    padding-top: 80px; /* Offset for sticky navbar */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: var(--gradient-bg), url('images/hero-car.jpg'); /* Attractive car-themed hero image */
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff; /* White text on hero */
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--border-radius-large);
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--clr-accent);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: background-color var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.4);
+}
+
+.cta-button:hover {
+    background-color: #ff6347; /* Lighter accent */
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(255, 69, 0, 0.6);
+}
+
+/* --- 4. Car Slider Section --- */
+#car-slider {
+    padding: 80px 0;
+    text-align: center;
+}
+
+#car-slider h2 {
+    margin-bottom: 40px;
+    font-size: 2rem;
+}
+
+.slider-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.car-list {
+    display: flex;
+    overflow-x: scroll; /* Smoothly Slidable */
+    scroll-behavior: smooth;
+    padding: 10px 0;
+    list-style: none;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.car-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.car-card {
+    min-width: 300px; /* Card size */
+    margin: 0 15px;
+    background: var(--clr-bg-card);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--clr-shadow-soft);
+    padding: 20px;
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.car-card:hover {
+    transform: translateY(-5px); /* Hover Animation */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.car-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.car-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.car-card .price {
+    color: var(--clr-primary);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 10;
+    opacity: 0.8;
+    transition: opacity var(--transition-speed);
+}
+
+.slider-arrow:hover {
+    opacity: 1;
+}
+
+.prev-arrow { left: 0; }
+.next-arrow { right: 0; }
+
+/* --- 5. Features Section --- */
+#features {
+    padding: 80px 5%;
+    background-color: var(--clr-bg-main);
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: var(--clr-bg-card);
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    text-align: center;
+    box-shadow: var(--clr-shadow-soft);
+    transition: transform var(--transition-speed);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: var(--clr-primary);
+    margin-bottom: 15px;
+}
+
+/* --- 6. How It Works Section --- */
+#how-it-works {
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.steps-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 40px auto 0;
+}
+
+.step-card {
+    flex-basis: 30%;
+    background: var(--clr-bg-card);
+    padding: 30px;
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--clr-shadow-soft);
+}
+
+.step-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--clr-accent);
+    margin-bottom: 10px;
+}
+
+.step-arrow {
+    color: var(--clr-secondary);
+    font-size: 1.5rem;
+}
+
+/* --- 7. Why Students Love Us --- */
+#why-love-us {
+    padding: 60px 5%;
+    text-align: center;
+    color: white;
+    background: var(--gradient-bg);
+    border-radius: var(--border-radius-large);
+    max-width: 1000px;
+    margin: 50px auto;
+}
+
+#why-love-us ul {
+    list-style: none;
+    text-align: left;
+    max-width: 600px;
+    margin: 20px auto 0;
+    font-size: 1.1rem;
+}
+
+#why-love-us li {
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+/* --- 8. Contact Section --- */
+#contact {
+    padding: 80px 5%;
+    text-align: center;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.contact-btn {
+    text-decoration: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform var(--transition-speed);
+}
+
+.contact-btn i {
+    margin-right: 8px;
+}
+
+.contact-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.call-btn { background-color: #28a745; } /* Green */
+.email-btn { background-color: #dc3545; } /* Red */
+.whatsapp-btn { background-color: #25d366; } /* WhatsApp Green */
+
+/* --- 9. Footer --- */
+footer {
+    background-color: #222;
+    color: #ccc;
+    padding: 40px 5%;
+    font-size: 0.9rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    gap: 30px;
+}
+
+.footer-section h4 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.footer-section a, .footer-section p {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    margin-bottom: 8px;
+    transition: color 0.2s;
+}
+
+.footer-section a:hover {
+    color: var(--clr-primary);
+}
+
+.social-icons a {
+    display: inline-block;
+    font-size: 1.2rem;
+    margin-right: 15px;
+    color: #ccc;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+/* --- 10. Animations & Enhancements --- */
+
+/* Loading Animation */
+#loading-screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: var(--clr-bg-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid var(--clr-primary);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Scroll Reveal (Hidden by default) */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 11. Responsive Design (Mobile) --- */
+@media (max-width: 768px) {
+    #navbar {
+        padding: 10px 4%;
+    }
+    
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .steps-container {
+        flex-direction: column;
+    }
+
+    .step-arrow {
+        transform: rotate(90deg);
+        margin: 10px 0;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+    }
+    
+    .footer-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
+
+/* --- Login Page Specific Styles --- */
+/* (Keep the existing #login-main and ::before background styles) */
+/* ... existing login-main styles ... */
+
+.login-card {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px; /* Reduced padding slightly */
+    background: var(--clr-bg-card);
+    border-radius: var(--border-radius-large);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35); /* Deeper shadow */
+    text-align: center;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.login-card h2 {
+    margin-bottom: 5px;
+    color: var(--clr-primary);
+}
+
+.login-card p {
+    margin-bottom: 25px;
+    color: var(--clr-text-secondary);
+    font-size: 0.95rem;
+}
+
+/* --- Tabbed Interface Styling --- */
+.form-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--clr-secondary);
+}
+
+.form-tabs button {
+    flex: 1;
+    padding: 10px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--clr-text-secondary);
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: color 0.3s, border-bottom-color 0.3s;
+}
+
+.form-tabs button.active {
+    color: var(--clr-primary);
+    border-bottom-color: var(--clr-primary);
+}
+
+.form-content {
+    transition: opacity 0.4s ease-in-out;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.form-content.active {
+    opacity: 1;
+    height: auto;
+    padding: 0;
+}
+
+
+/* --- Input Group and Focus Effects --- */
+.input-group {
+    position: relative;
+    margin-bottom: 30px; /* Increased margin */
+    text-align: left;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--clr-secondary);
+    transition: color 0.3s;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 1px solid var(--clr-secondary);
+    border-radius: 50px;
+    font-size: 1rem;
+    background: var(--clr-bg-main);
+    color: var(--clr-text-main);
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    left: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--clr-secondary);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 
+        top 0.3s ease, 
+        font-size 0.3s ease, 
+        padding 0.3s ease;
+    background-color: transparent;
+}
+
+/* Input Focus/Filled Interaction */
+.input-group input:focus, 
+.input-group input:not(:placeholder-shown) {
+    border-color: var(--clr-primary);
+    background: var(--clr-bg-card); /* White/Card background on focus */
+    box-shadow: 0 0 0 1px var(--clr-primary);
+}
+
+/* Move label up when focused or filled */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+    top: 0; /* Move label to the top */
+    font-size: 0.75rem;
+    padding: 0 5px;
+    color: var(--clr-primary);
+    background-color: var(--clr-bg-card);
+    transform: translateY(-50%);
+    left: 40px;
+}
+
+.input-group input:focus ~ i {
+    color: var(--clr-primary);
+}
+
+/* Adjustments for the buttons */
+.cta-button {
+    /* Keep existing CTA button styles, but add full width */
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px;
+}
+
+.forgot-password {
+    margin-bottom: 30px;
+}
+
+
