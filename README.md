@@ -37,7 +37,9 @@ Implementing a structured Git workflow and versioning strategy
 
   + GitHub – Remote repository hosting and collaboration platform
 
-## Branching Strategy
+## Branching Strateg
+
+Branching is the creation of a separate version of the code to develop features or fix bugs independently. It is used to allow parallel development, prevent errors in the main code, and improve collaboration and code quality.
   + main branch
   
      + Contains stable and production-ready code
